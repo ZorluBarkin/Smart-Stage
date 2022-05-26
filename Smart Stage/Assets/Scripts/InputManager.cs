@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private Camera arCam;
     [SerializeField] private ARRaycastManager _raycastManger;
+    [SerializeField] private GameObject crosshair;
 
     private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
 
@@ -44,6 +45,20 @@ public class InputManager : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
         return results.Count > 0;
+    }
+
+    private void CrossHairCalculation()
+    {
+        Vector3 origin = arCam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0));
+
+        Ray ray = arCam.ScreenPointToRay(origin);
+
+        if (_raycastManger.Raycast(ray, _hits))
+        {
+            Pose pose = _hits[0].pose;
+            crosshair.transform.position = pose.position;
+            crosshair.transform.eulerAngles = new Vector3(90, 0, 0);
+        }
     }
 
 }
