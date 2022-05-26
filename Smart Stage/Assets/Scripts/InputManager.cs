@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject arObj;
+
     [SerializeField] private Camera arCam;
     [SerializeField] private ARRaycastManager _raycastManger;
 
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
             if(_raycastManger.Raycast(ray, _hits))
             {
                 Pose pose = _hits[0].pose;
-                Instantiate(arObj, pose.position, pose.rotation);
+                Instantiate(DataHandler.Instance.furniture, pose.position, pose.rotation);
             }
         }
 
