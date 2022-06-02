@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +12,18 @@ public class DataHandler : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<DataHandler>();
             }
-
             return instance;
         }
+
+    }
+
+
+    public GameObject GetFurniture()
+    {
+        return furniture;
     }
 }
